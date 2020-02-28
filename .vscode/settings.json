@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/c524c429-e74a-451a-9195-2f43c6a37b45/resourceGroups/LambdaFoodTruckTracker3/providers/Microsoft.Web/sites/foodtrucktrckr3",
+    "appService.deploySubpath": ""
+}
