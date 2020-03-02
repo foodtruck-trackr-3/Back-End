@@ -17,8 +17,7 @@ function find() {
 
 function findBy(filter) {
     return db('foodtrucks')
-        .where('foodType', filter)
-        .select('id', 'truckName', 'location', 'foodType', 'owner');
+        .where('foodType', filter);
     
 }
 
