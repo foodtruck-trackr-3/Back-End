@@ -4,23 +4,7 @@ const checkRole = require('../auth/check-role-middleware.js');
 const Trucks = require('./trucks-model.js');
 
 router.get('/', (req, res) => {
-    if(req.query.foodType) {
-        const foodType = req.query.foodType;
-        Trucks.findBy(foodType)
-            .then(trucks => {
-                if(trucks.length > 0) {
-                    res.status(200).json(trucks);
-                } else {
-                    res.status(400).json({
-                        message: `No ${foodType} trucks could be located`
-                    })
-                }
-            })
-            .catch(err => {
-                res.status(500).json(err);
-            });
-    } else {
-        Trucks.find()
+    Trucks.find()
         .then(trucks => {
             res.status(200).json(trucks);
         })
@@ -29,8 +13,6 @@ router.get('/', (req, res) => {
                 message: "Truck not found"
             });
         });
-    }
-    
 });
 
 router.get('/mytrucks', authenticated, (req, res) => {
@@ -52,26 +34,24 @@ router.get('/mytrucks', authenticated, (req, res) => {
     };
 });
 
-// router.get('/', (req, res) => {
-//     const foodType = req.query;
-//     console.log(req.query.foodType);
-//     if(foodType) {
-//         Trucks.findBy(foodType)
-//             .then(trucks => {
-//                 res.status(200).json(trucks);
-//             })
-//             .catch(err => {
-//                 res.status(404).json({
-//                     message: `No ${foodType} trucks found`
-//                 });
-//             });
-//     } else {
-//         res.status(400).json({
-//             message: "Please provide a food type"
-//         })
-//     }
-    
-// });
+router.get('/:foodType', (req, res) => {
+    const foodType = req.params.foodType;
+    if(foodType) {
+        Trucks.findBy(foodType)
+            .then(trucks => {
+                res.status(200).json(trucks);
+            })
+            .catch(err => {
+                res.status(404).json({
+                    message: `No ${foodType} trucks found`
+                });
+            });
+    } else {
+        res.status(400).json({
+            message: "Please provide a food type"
+        })
+    }
+});
 
 router.post('/add', authenticated, checkRole('Operator'), (req, res) => {
     const truckOwner = req.dJwt.username;
