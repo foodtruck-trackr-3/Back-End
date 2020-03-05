@@ -25,6 +25,11 @@ This back end uses a header token named "authorization" for all auth operations 
 - Retrieves a list of food trucks
 - Information returned for each truck: id, truckName, location, foodType, owner
 
+/api/trucks/foodtypes
+
+- Retrieves an array of available food types to filter from
+- Array only contains unique values
+
 /api/trucks/filter
 
 - Retrieves a list of food trucks with the requested filter
