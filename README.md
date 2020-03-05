@@ -25,7 +25,7 @@ This back end uses a header token named "authorization" for all auth operations 
 - Retrieves a list of food trucks
 - Information returned for each truck: id, truckName, location, foodType, owner
 
-/api/trucks/:filter
+/api/trucks/filter
 
 - Retrieves a list of food trucks with the requested filter
 - Information returned for each truck: id, truckName, location, foodType, owner
@@ -52,7 +52,7 @@ This back end uses a header token named "authorization" for all auth operations 
 
 ## UPDATE ##
 
-/api/trucks/update/:id
+/api/trucks/update/id
 
 - Requires the user to be logged in as an operator and the owner of the food truck
 - Updates the information of the food truck
@@ -60,7 +60,7 @@ This back end uses a header token named "authorization" for all auth operations 
 
 ## DELETE ##
 
-/api/trucks/remove/:id
+/api/trucks/remove/id
 
 - Requires the user to be logged in as an operator and the owner of the food truck
 - Removes a food truck from the database
