@@ -87,23 +87,31 @@ router.put('/update/:id', authenticated, checkRole('Operator'), (req, res) => {
         owner: truckIn.truckOwner
     };
 
-    if(truck.owner == truckOwner) {
-        if(truck.name && truck.location && truck.foodType) {
-            Trucks.update(id, truck)
-                .then(updated => {
-                    res.status(201).json(updated);
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        message: "Could not update truck"
-                    });
-                })
-        } else {
-            res.status(400).json({message: "Please enter a truck name, location, and food type"});
-        }
-    } else {
-        res.status(401).json({message: "You do not own this truck"});
-    }
+    Trucks.findById(id)
+        .then(found => {
+            if(found) {
+                if(found.owner == truckOwner) {
+                    if(truck.truckName && truck.location ** truck.foodType) {
+                        Trucks.update(id, truck)
+                            .then(updated => {
+                                res.status(201).json(updated);
+                            })
+                            .catch(err => {
+                                res.status(500).json({message: `Could not update ${truck.truckName}`})
+                            })
+                    } else {
+                        res.status(400).json({message: "Please enter a truck name, location, and food type"});
+                    }
+                } else {
+                    res.status(401).json({message: "You do not own this truck"});
+                }
+            } else {
+                res.status(404).json({message: "Truck not found"});
+            }
+        })
+        .catch(err => {
+            res.status(404)>json({message: "Truck not found"});
+        })
 });
 
 router.delete('/remove/:id', authenticated, checkRole('Operator'), (req, res) => {
