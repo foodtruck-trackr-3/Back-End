@@ -90,7 +90,7 @@ router.put('/update/:id', authenticated, checkRole('Operator'), (req, res) => {
         .then(found => {
             if(found) {
                 if(found.owner == truckOwner) {
-                    if(truck.truckName && truck.location ** truck.foodType) {
+                    if(truck.truckName && truck.location && truck.foodType) {
                         Trucks.update(id, truck)
                             .then(updated => {
                                 res.status(201).json(updated);
