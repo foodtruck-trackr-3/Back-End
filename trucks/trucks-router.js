@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/mytrucks', authenticated, (req, res) => {
     const owner = req.dJwt.username;
     if(owner) {
-        Trucks.find(owner)
+        Trucks.findByOwner(owner)
             .then(trucks => {
                 res.status(200).json(trucks);
             })
