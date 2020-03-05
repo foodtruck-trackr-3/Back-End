@@ -83,8 +83,7 @@ router.put('/update/:id', authenticated, checkRole('Operator'), (req, res) => {
     let truck = {
         truckName: truckIn.truckName,
         location: truckIn.location,
-        foodType: truckIn.foodType,
-        owner: truckIn.truckOwner
+        foodType: truckIn.foodType
     };
 
     Trucks.findById(id)
