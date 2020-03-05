@@ -102,7 +102,7 @@ router.put('/update/:id', authenticated, checkRole('Operator'), (req, res) => {
             res.status(400).json({message: "Please enter a truck name, location, and food type"});
         }
     } else {
-        res.status(400).json({message: "You do not own this truck"});
+        res.status(401).json({message: "You do not own this truck"});
     }
 });
 
