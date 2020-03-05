@@ -6,6 +6,7 @@ module.exports = {
     findBy,
     findById,
     findByOwner,
+    findFoodTypes,
     update,
     remove
 };
@@ -37,6 +38,11 @@ function findByOwner(owner) {
     return db('foodtrucks')
         .where('owner', owner)
         .select('id', 'truckName', 'location', 'foodType');
+}
+
+function findFoodTypes() {
+    return db('foodtrucks')
+        .distinct('foodType');
 }
 
 function update(id, truck) {

@@ -34,6 +34,19 @@ router.get('/mytrucks', authenticated, (req, res) => {
     };
 });
 
+router.get('/foodtypes', (req, res) => {
+    Trucks.findFoodTypes()
+        .then(trucks => {
+            trucks = trucks.map(e => {return e.foodType})
+            res.status(200).json(trucks);
+        })
+        .catch(err => {
+            res.status(404).json({
+                message: "Truck not found"
+            });
+        });
+});
+
 router.get('/:foodType', (req, res) => {
     const foodType = req.params.foodType;
     if(foodType) {
