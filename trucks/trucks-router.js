@@ -122,7 +122,7 @@ router.put('/update/:id', authenticated, checkRole('Operator'), (req, res) => {
             }
         })
         .catch(err => {
-            res.status(404)>json({message: "Truck not found"});
+            res.status(500)>json({message: `Error attempting to find truck with ID:${id}`});
         })
 });
 

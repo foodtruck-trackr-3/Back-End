@@ -6,9 +6,16 @@ const secret = require('../config/secrets.js');
 const Users = require('../users/users-model.js');
 
 router.post('/register', (req, res) => {
-    let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 10);
-    user.password = hash;
+    let user;
+
+    if((req.body.username.length) > 0) {
+        user = req.body;
+    }
+    
+    if(user.username && user.password){
+        const hash = bcrypt.hashSync(user.password, 10);
+        user.password = hash;
+    }
 
     if(user.username && user.password) {
         Users.add(user)
@@ -19,7 +26,7 @@ router.post('/register', (req, res) => {
                 res.status(500).json({message: "Could not add user"});
             })
     } else {
-        res.status(500).json({message: "Please provide a username and password"});
+        res.status(400).json({message: "Please provide a username and password"});
     };
 });
 
